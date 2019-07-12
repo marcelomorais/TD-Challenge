@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TalkDeskProject.Extension
+namespace TalkDeskProject.Extensions
 {
     public static class DictionaryExtension
     {

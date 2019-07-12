@@ -1,0 +1,11 @@
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\bin\Debug\netcoreapp2.1\TalkDeskProject.deps.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\bin\Debug\netcoreapp2.1\TalkDeskProject.runtimeconfig.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\bin\Debug\netcoreapp2.1\TalkDeskProject.runtimeconfig.dev.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\bin\Debug\netcoreapp2.1\TalkDeskProject.dll
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\bin\Debug\netcoreapp2.1\TalkDeskProject.pdb
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.csprojAssemblyReference.cache
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.csproj.CoreCompileInputs.cache
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfoInputs.cache
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfo.cs
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.dll
+C:\Users\Utilizador\source\repos\TalkDeskProject\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.pdb

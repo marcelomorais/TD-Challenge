@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TalkDeskProject\\TalkDeskProject.csproj",
+      "projectUniqueName": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TD-Challenge\\TalkDeskProject\\TalkDeskProject.csproj",
       "projectName": "TalkDeskProject",
-      "projectPath": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TalkDeskProject\\TalkDeskProject.csproj",
+      "projectPath": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TD-Challenge\\TalkDeskProject\\TalkDeskProject.csproj",
       "packagesPath": "C:\\Users\\Utilizador\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TalkDeskProject\\obj\\",
+      "outputPath": "C:\\Users\\Utilizador\\source\\repos\\TalkDeskProject\\TD-Challenge\\TalkDeskProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

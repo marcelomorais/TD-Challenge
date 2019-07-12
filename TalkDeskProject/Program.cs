@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System.IO;
 using TalkDeskProject.Configuration;
 using TalkDeskProject.Interfaces;
@@ -10,25 +11,24 @@ namespace TalkDeskProject
     {
         static void Main(string[] args)
         {
-            var serviceProvider = new ServiceCollection()
-            .AddSingleton<IEngineService, EngineService>()
-            .AddSingleton<IValidators, Validator>()
-            .BuildServiceProvider();
-
             var builder = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json",
-                     optional: true,
-                     reloadOnChange: true);
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("config.json",
+                        optional: false,
+                        reloadOnChange: true);
+
 
             IConfigurationRoot configuration = builder.Build();
             var mySettingsConfig = new ConfigurationSettings();
-            //configuration.GetSection("Config").Bind(mySettingsConfig);
 
-            //IConfigurationRoot configuration = builder.Build();
+            var serviceProvider = new ServiceCollection()
+            .AddOptions()
+            .Configure<ConfigurationSettings>(options => configuration.GetSection("Config").Bind(options))
+            .AddSingleton<IEngine, Engine>()
+            .AddSingleton<IValidator, Validator>()
+            .BuildServiceProvider();
 
-
-            var engine = serviceProvider.GetService<IEngineService>();
+            var engine = serviceProvider.GetService<IEngine>();
 
             engine.Initialise();
         }

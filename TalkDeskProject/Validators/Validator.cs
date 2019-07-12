@@ -2,7 +2,7 @@
 
 namespace TalkDeskProject.Validators
 {
-    public class Validator : IValidators
+    public class Validator : IValidator
     {
         public bool ValidateFormats(string[] lineValue)
         {

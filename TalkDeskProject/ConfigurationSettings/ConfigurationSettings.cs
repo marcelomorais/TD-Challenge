@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace TalkDeskProject.Configuration
 {
+    [JsonObject("Config")]
     public class ConfigurationSettings
     {
-        public string Delimiter { get; set; }
-        public int QuantityFields { get; set; }
+        public char Delimiter { get; set; }
+        public char PhoneIndicator { get; set; }
+        public int TotalDelimiters { get; set; }
         public int QuantityPhoneNumbers { get; set; }
+        public int MoreExpensiveMinutes { get; set; }
+        public decimal CostBeforeFiveMinutes { get; set; }
+        public decimal CostAfterFiveMinutes { get; set; }
     }
 }

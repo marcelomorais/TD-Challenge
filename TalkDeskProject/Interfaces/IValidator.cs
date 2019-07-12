@@ -1,6 +1,6 @@
 ﻿namespace TalkDeskProject.Validators
 {
-    public interface IValidators
+    public interface IValidator
     {
         bool ValidateFormats(string[] lineValue);
     }

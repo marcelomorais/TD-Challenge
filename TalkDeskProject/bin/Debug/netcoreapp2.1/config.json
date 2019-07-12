@@ -1,7 +1,11 @@
 {
   "Config": {
     "Delimiter": ";",
-    "QuantityFields": 3,
-    "QuantityPhoneNumbers": 2
+    "PhoneIndicator": "+",
+    "TotalDelimiters": 3,
+    "QuantityPhoneNumbers": 2,
+    "MoreExpensiveMinutes": 5,
+    "CostBeforeFiveMinutes": 0.05,
+    "CostAfterFiveMinutes": 0.02
   }
 }

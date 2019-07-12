@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using TalkDeskProject.Configuration;
 using TalkDeskProject.Constants;
 using TalkDeskProject.Extensions;
 using TalkDeskProject.Interfaces;
@@ -11,13 +14,15 @@ using TalkDeskProject.Validators;
 
 namespace TalkDeskProject
 {
-    public class EngineService : IEngineService
+    public class Engine : IEngine
     {
-        private IValidators _validator;
+        private IValidator _validator;
+        private ConfigurationSettings _configuration;
 
-        public EngineService(IValidators validator)
+        public Engine(IValidator validator, IOptions<ConfigurationSettings> configuration)
         {
             _validator = validator;
+            _configuration = configuration.Value;
         }
 
         public async Task Initialise()
@@ -33,9 +38,14 @@ namespace TalkDeskProject
 
             try
             {
-                var lines = await File.ReadAllLinesAsync(input);
+                List<string> alllines = new List<string>();
 
-                if (!lines.Any())
+                File.ReadLines(input, Encoding.UTF8)
+                    .AsParallel()
+                    .WithDegreeOfParallelism(10)
+                    .ForAll(x => alllines.Add(x));
+
+                if (!alllines.Any())
                 {
                     Console.WriteLine(Message.EmptyFile);
                     await Initialise();
@@ -43,7 +53,7 @@ namespace TalkDeskProject
 
                 Console.WriteLine(Message.Calculating);
 
-                await ProcessLines(lines);
+                await ProcessLines(alllines);
             }
             catch (FileNotFoundException)
             {
@@ -63,8 +73,7 @@ namespace TalkDeskProject
                 await Initialise();
             }
         }
-
-        public async Task ProcessLines(string[] lines)
+        public async Task ProcessLines(List<string> lines)
         {
             Dictionary<string, decimal> totalAmountPerNumber = new Dictionary<string, decimal>();
             Dictionary<string, double> totalCallTimePerNumber = new Dictionary<string, double>();
@@ -74,13 +83,13 @@ namespace TalkDeskProject
 
             foreach (var item in lines)
             {
-                if (item.Count(x => x == ';') != 3 || item.Count(x => x == '+') != 2)
+                if (item.Count(x => x == _configuration.Delimiter) != _configuration.TotalDelimiters || item.Count(x => x == _configuration.PhoneIndicator) != _configuration.QuantityPhoneNumbers)
                 {
                     Console.WriteLine($"The line with value \"{item}\" wasn't computed because was bad formatted.\n");
                     errorLines++;
                     continue;
                 }
-                var lineItems = item.Split(";");
+                var lineItems = item.Split(_configuration.Delimiter);
 
                 if (!_validator.ValidateFormats(lineItems))
                 {
@@ -104,8 +113,6 @@ namespace TalkDeskProject
 
             Console.WriteLine($"Total: {finalAnswer}\n");
         }
-
-
         public (string callFrom, decimal totalAmount) CalculateAmount(string[] line)
         {
             decimal totalAmount = 0;
@@ -117,7 +124,9 @@ namespace TalkDeskProject
             var minutes = timeDiff.Minutes;
             var seconds = timeDiff.Seconds;
 
-            totalAmount = minutes > 5 ? (minutes - 5) * 0.02M + 0.25M : minutes * 0.05M;
+            totalAmount = minutes > _configuration.MoreExpensiveMinutes ? 
+                (minutes - _configuration.MoreExpensiveMinutes) * _configuration.CostAfterFiveMinutes + (_configuration.CostBeforeFiveMinutes * _configuration.MoreExpensiveMinutes) : 
+                minutes * _configuration.CostBeforeFiveMinutes;
 
             return (callFrom, totalAmount);
         }
@@ -131,7 +140,6 @@ namespace TalkDeskProject
 
             return (callFrom, timeDiff.TotalSeconds);
         }
-
         public string CalculateFinalResult(Dictionary<string, decimal> totalAmountPerNumber, Dictionary<string, double> totalCallTimePerNumber)
         {
             var biggerAmountNotCharged = totalAmountPerNumber.Max(x => x.Value);

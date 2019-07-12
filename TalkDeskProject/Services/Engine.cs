@@ -66,7 +66,9 @@ namespace TalkDeskProject
 
         public async Task ProcessLines(string[] lines)
         {
-            Dictionary<string, decimal> finalResult = new Dictionary<string, decimal>();
+            Dictionary<string, decimal> totalAmountPerNumber = new Dictionary<string, decimal>();
+            Dictionary<string, double> totalCallTimePerNumber = new Dictionary<string, double>();
+
             int processedLines = 0;
             int errorLines = 0;
 
@@ -87,27 +89,24 @@ namespace TalkDeskProject
                     continue;
                 }
 
-                var calc = CalculateTime(lineItems);
+                var calc = CalculateAmount(lineItems);
+                var time = CalculateTime(lineItems);
 
-                finalResult.UpdateAmount(calc.callFrom, calc.totalAmount);
-
+                totalAmountPerNumber.UpdateValue(calc.callFrom, calc.totalAmount);
+                totalCallTimePerNumber.UpdateValue(time.callFrom, time.totalTime);
                 processedLines++;
             }
 
             Console.WriteLine($"Total of {processedLines} lines processed with success.\n");
             Console.WriteLine($"Total of {errorLines} lines not processed.\n");
 
-            var biggerAmount = finalResult.Max(x => x.Value);
-            var phoneWithBiggerAmount = finalResult.FirstOrDefault(x => x.Value == biggerAmount);
-            var sumOfAllAmounts = finalResult.Values.Sum();
-            var finalAnswer = (sumOfAllAmounts - biggerAmount).ToString("N", CultureInfo.InvariantCulture);
+            var finalAnswer = CalculateFinalResult(totalAmountPerNumber, totalCallTimePerNumber);
 
-            Console.WriteLine($"Phone with bigger amount cost: {phoneWithBiggerAmount.Key} with amount {phoneWithBiggerAmount.Value}.\n");
             Console.WriteLine($"Total: {finalAnswer}\n");
         }
 
 
-        public (string callFrom, decimal totalAmount) CalculateTime(string[] line)
+        public (string callFrom, decimal totalAmount) CalculateAmount(string[] line)
         {
             decimal totalAmount = 0;
             DateTime timeStart = DateTime.Parse(line[0]);
@@ -118,9 +117,40 @@ namespace TalkDeskProject
             var minutes = timeDiff.Minutes;
             var seconds = timeDiff.Seconds;
 
-            totalAmount = minutes > 5 ? (minutes - 5) * 0.2M + 0.25M : minutes * 0.5M;
+            totalAmount = minutes > 5 ? (minutes - 5) * 0.02M + 0.25M : minutes * 0.05M;
 
             return (callFrom, totalAmount);
+        }
+        public (string callFrom, double totalTime) CalculateTime(string[] line)
+        {
+            DateTime timeStart = DateTime.Parse(line[0]);
+            DateTime timeFinish = DateTime.Parse(line[1]);
+            string callFrom = line[2];
+
+            var timeDiff = timeFinish - timeStart;
+
+            return (callFrom, timeDiff.TotalSeconds);
+        }
+
+        public string CalculateFinalResult(Dictionary<string, decimal> totalAmountPerNumber, Dictionary<string, double> totalCallTimePerNumber)
+        {
+            var biggerAmountNotCharged = totalAmountPerNumber.Max(x => x.Value);
+            var highestCall = totalCallTimePerNumber.Max(x => x.Value);
+
+            var phoneWithBiggerAmount = totalAmountPerNumber.FirstOrDefault(x => x.Value == biggerAmountNotCharged);
+            var phoneWithHighestCall = totalCallTimePerNumber.FirstOrDefault(x => x.Value == highestCall);
+
+            totalAmountPerNumber.Remove(phoneWithHighestCall.Key);
+
+            var biggerAmountCharged = totalAmountPerNumber.Max(x => x.Value);
+
+            var sumOfAllAmounts = totalAmountPerNumber.Values.Sum();
+            var finalAnswer = sumOfAllAmounts.ToString("N", CultureInfo.InvariantCulture);
+
+            Console.WriteLine($"Phone with bigger amount cost: {phoneWithBiggerAmount.Key} with amount {phoneWithBiggerAmount.Value}.\n");
+            Console.WriteLine($"Phone with highest call duration (will not be charged): {phoneWithHighestCall.Key} with {phoneWithHighestCall.Value} seconds.\n");
+
+            return finalAnswer;
         }
 
     }

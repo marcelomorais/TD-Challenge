@@ -1,0 +1,7 @@
+{
+  "Config": {
+    "Delimiter": ";",
+    "QuantityFields": 3,
+    "QuantityPhoneNumbers": 2
+  }
+}

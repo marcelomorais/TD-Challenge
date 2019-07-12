@@ -20,3 +20,4 @@ C:\Users\137443\Documents\GitHub\TD-Challenge\TalkDeskProject\obj\Debug\netcorea
 C:\Users\137443\Documents\GitHub\TD-Challenge\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfo.cs
 C:\Users\137443\Documents\GitHub\TD-Challenge\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.dll
 C:\Users\137443\Documents\GitHub\TD-Challenge\TalkDeskProject\obj\Debug\netcoreapp2.1\TalkDeskProject.pdb
+C:\Users\137443\Documents\GitHub\TD-Challenge\TalkDeskProject\bin\Debug\netcoreapp2.1\config.json

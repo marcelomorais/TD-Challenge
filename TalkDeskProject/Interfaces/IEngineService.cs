@@ -6,6 +6,6 @@ namespace TalkDeskProject.Interfaces
     {
         Task Initialise();
         Task ProcessLines(string[] lines);
-        (string callFrom, decimal totalAmount) CalculateTime(string[] line);
+        (string callFrom, decimal totalAmount) CalculateAmount(string[] line);
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace TalkDeskProject.Validators
+﻿namespace TalkDeskProject.Validators
 {
     public interface IValidators
     {
         bool ValidateFormats(string[] lineValue);
-
     }
 }

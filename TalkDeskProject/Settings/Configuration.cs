@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace TalkDeskProject.Configuration
+namespace TalkDeskProject.Settings
 {
     [JsonObject("Config")]
-    public class ConfigurationSettings
+    public class Configuration
     {
         public char Delimiter { get; set; }
         public char PhoneIndicator { get; set; }

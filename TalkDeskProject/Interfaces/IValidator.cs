@@ -2,6 +2,6 @@
 {
     public interface IValidator
     {
-        bool ValidateFormats(string[] lineValue);
+        bool ValidateFormats(string item);
     }
 }

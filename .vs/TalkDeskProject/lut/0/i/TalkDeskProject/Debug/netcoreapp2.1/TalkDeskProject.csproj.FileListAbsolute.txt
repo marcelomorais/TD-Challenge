@@ -1,0 +1,10 @@
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\b\TalkDeskProject\Debug\netcoreapp2.1\config.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\b\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.deps.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\b\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.runtimeconfig.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\b\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.runtimeconfig.dev.json
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\b\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.dll
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.csproj.CoreCompileInputs.cache
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfoInputs.cache
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfo.cs
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.csproj.CopyComplete
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.dll

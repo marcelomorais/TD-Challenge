@@ -26,7 +26,6 @@ namespace TalkDeskProject.Services
 
             var timeDiff = timeFinish - timeStart;
             var minutes = timeDiff.Minutes;
-            var seconds = timeDiff.Seconds;
 
             totalAmount = minutes > _configuration.MoreExpensiveMinutes ?
                 (minutes - _configuration.MoreExpensiveMinutes) * _configuration.CostAfterFiveMinutes + (_configuration.CostBeforeFiveMinutes * _configuration.MoreExpensiveMinutes) :

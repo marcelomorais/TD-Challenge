@@ -66,12 +66,16 @@ namespace TalkDeskProject.Services
             _console.WriteLine($"Total of {processedLines} lines processed with success.\n");
             _console.WriteLine($"Total of {errorLines} lines not processed.\n");
 
-            var finalResult = _accountment.CalculateFinalResult(totalAmountPerNumber, totalCallTimePerNumber);
+            if (processedLines > 0)
+            {
+                var finalResult = _accountment.CalculateFinalResult(totalAmountPerNumber, totalCallTimePerNumber);
 
-            _console.WriteLine($"Phone with bigger amount cost: {finalResult.phoneWithBiggerAmount.Key} with amount {finalResult.phoneWithBiggerAmount.Value}.\n");
-            _console.WriteLine($"Phone with highest call duration (will not be charged): {finalResult.phoneWithHighestCall.Key} with {finalResult.phoneWithHighestCall.Value} seconds.\n");
+                _console.WriteLine($"Phone with bigger amount cost: {finalResult.phoneWithBiggerAmount.Key} with amount {finalResult.phoneWithBiggerAmount.Value}.\n");
+                _console.WriteLine($"Phone with highest call duration (will not be charged): {finalResult.phoneWithHighestCall.Key} with {finalResult.phoneWithHighestCall.Value} seconds.\n");
 
-            _console.WriteLine($"Total: {finalResult.finalAnswer}\n");
+                _console.WriteLine($"Total: {finalResult.finalAnswer}\n");
+            }
+
         }
     }
 }

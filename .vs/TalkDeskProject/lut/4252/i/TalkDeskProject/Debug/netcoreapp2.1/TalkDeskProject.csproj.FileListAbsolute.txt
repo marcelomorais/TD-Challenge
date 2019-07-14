@@ -8,3 +8,4 @@ C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProjec
 C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.AssemblyInfo.cs
 C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.csproj.CopyComplete
 C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.dll
+C:\Users\Utilizador\source\repos\TalkDeskProject\TD-Challenge\.vs\TalkDeskProject\lut\0\i\TalkDeskProject\Debug\netcoreapp2.1\TalkDeskProject.csprojAssemblyReference.cache

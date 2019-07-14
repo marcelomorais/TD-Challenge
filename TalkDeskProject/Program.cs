@@ -14,7 +14,7 @@ namespace TalkDeskProject
 
             var engine = serviceProvider.GetService<IEngine>();
 
-            engine.Initialise();
+            engine.Initialise(args[0]);
         }
 
     }

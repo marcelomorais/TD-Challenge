@@ -21,12 +21,15 @@ namespace TalkDeskProject.Services
             _fileWrapper = fileWrapper;
         }
 
-        public virtual async Task Initialise()
+        public virtual async Task Initialise(string input = null)
         {
             try
             {
-                _console.WriteLine(Message.InsertFile);
-                string input = _console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    _console.WriteLine(Message.InsertFile);
+                    input = _console.ReadLine();
+                }
 
                 if (string.IsNullOrWhiteSpace(input))
                 {

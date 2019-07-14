@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TalkDeskProject": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Utilizador\\Desktop\\firstTest.txt"
+    }
+  }
+}

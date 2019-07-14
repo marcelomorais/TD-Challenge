@@ -59,7 +59,7 @@ namespace TalkDeskProject.Tests
         [TestMethod]
         public async Task ProcessLines_ValidLines_AllMethodsAreBeingCalled()
         {
-            _mockAccountment.Setup(x => x.CalculateAmount(It.IsAny<string[]>())).Returns((string.Empty, default(decimal)));
+            _mockAccountment.Setup(x => x.CalculateAmount(It.IsAny<Dictionary<string, double>>())).Returns(It.IsAny<Dictionary<string, decimal>>());
             _mockAccountment.Setup(x => x.CalculateTime(It.IsAny<string[]>())).Returns((string.Empty, default(double)));
             _mockAccountment.Setup(x => x.CalculateFinalResult(It.IsAny<Dictionary<string, decimal>>(), It.IsAny<Dictionary<string, double>>()));
             _mockValidator.Setup(x => x.ValidateFormats(It.IsAny<string>())).Returns(true);
@@ -67,7 +67,7 @@ namespace TalkDeskProject.Tests
             await _engine.Object.ProcessLines(lines);
 
             _mockValidator.Verify(x => x.ValidateFormats(It.IsAny<string>()), Times.Exactly(lines.Count));
-            _mockAccountment.Verify(x => x.CalculateAmount(It.IsAny<string[]>()), Times.Exactly(lines.Count));
+            _mockAccountment.Verify(x => x.CalculateAmount(It.IsAny<Dictionary<string, double>>()), Times.Once);
             _mockAccountment.Verify(x => x.CalculateTime(It.IsAny<string[]>()), Times.Exactly(lines.Count));
             _mockAccountment.Verify(x => x.CalculateFinalResult(It.IsAny<Dictionary<string, decimal>>(), It.IsAny<Dictionary<string, double>>()), Times.Once);
             _mockConsole.Verify(x => x.WriteLine(It.IsAny<string>()), Times.AtLeast(5));
@@ -80,7 +80,7 @@ namespace TalkDeskProject.Tests
             await _engine.Object.ProcessLines(badFormattedlines);
 
             _mockValidator.Verify(x => x.ValidateFormats(It.IsAny<string>()), Times.Exactly(badFormattedlines.Count));
-            _mockAccountment.Verify(x => x.CalculateAmount(It.IsAny<string[]>()), Times.Never);
+            _mockAccountment.Verify(x => x.CalculateAmount(It.IsAny<Dictionary<string, double>>()), Times.Once);
             _mockAccountment.Verify(x => x.CalculateTime(It.IsAny<string[]>()), Times.Never);
             _mockAccountment.Verify(x => x.CalculateFinalResult(It.IsAny<Dictionary<string, decimal>>(), It.IsAny<Dictionary<string, double>>()), Times.Never);
             _mockConsole.Verify(x => x.WriteLine(It.IsAny<string>()), Times.AtLeast(4));

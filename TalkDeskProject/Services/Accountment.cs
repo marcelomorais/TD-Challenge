@@ -17,23 +17,26 @@ namespace TalkDeskProject.Services
             _configuration = configuration.Value;
         }
 
-        public virtual (string callFrom, decimal totalAmount) CalculateAmount(string[] line)
+        public Dictionary<string, decimal> CalculateAmount(Dictionary<string, double> calls)
         {
-            decimal totalAmount = 0;
-            DateTime timeStart = DateTime.Parse(line[0]);
-            DateTime timeFinish = DateTime.Parse(line[1]);
-            string callFrom = line[2];
+            Dictionary<string, decimal> valuePerPhone = new Dictionary<string, decimal>();
 
-            var timeDiff = timeFinish - timeStart;
-            var minutes = timeDiff.Minutes;
+            foreach (var item in calls)
+            {
+                var phone = item.Key;
+                var timeDiff = TimeSpan.FromSeconds(item.Value);
+                var minutes = Convert.ToDecimal(timeDiff.TotalMinutes);
 
-            totalAmount = minutes > _configuration.MoreExpensiveMinutes ?
+                var amount = minutes > _configuration.MoreExpensiveMinutes ?
                 (minutes - _configuration.MoreExpensiveMinutes) * _configuration.CostAfterFiveMinutes + (_configuration.CostBeforeFiveMinutes * _configuration.MoreExpensiveMinutes) :
                 minutes * _configuration.CostBeforeFiveMinutes;
 
-            return (callFrom, totalAmount);
+                valuePerPhone.Add(phone, decimal.Round(amount, 2, MidpointRounding.AwayFromZero));
+            }
+            
+            return valuePerPhone;
         }
-        public virtual (string callFrom, double totalTime) CalculateTime(string[] line)
+        public (string callFrom, double totalTime) CalculateTime(string[] line)
         {
             DateTime timeStart = DateTime.Parse(line[0]);
             DateTime timeFinish = DateTime.Parse(line[1]);
@@ -45,10 +48,10 @@ namespace TalkDeskProject.Services
         }
         public virtual (KeyValuePair<string, decimal> phoneWithBiggerAmount, KeyValuePair<string, double> phoneWithHighestCall, string finalAnswer) CalculateFinalResult(Dictionary<string, decimal> totalAmountPerNumber, Dictionary<string, double> totalCallTimePerNumber)
         {
-            var biggerAmountNotCharged = totalAmountPerNumber.Max(x => x.Value);
+            var biggerAmount = totalAmountPerNumber.Max(x => x.Value);
             var highestCall = totalCallTimePerNumber.Max(x => x.Value);
 
-            var phoneWithBiggerAmount = totalAmountPerNumber.FirstOrDefault(x => x.Value == biggerAmountNotCharged);
+            var phoneWithBiggerAmount = totalAmountPerNumber.FirstOrDefault(x => x.Value == biggerAmount);
             var phoneWithHighestCall = totalCallTimePerNumber.FirstOrDefault(x => x.Value == highestCall);
 
             totalAmountPerNumber.Remove(phoneWithHighestCall.Key);

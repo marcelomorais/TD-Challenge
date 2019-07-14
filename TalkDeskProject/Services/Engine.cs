@@ -31,14 +31,13 @@ namespace TalkDeskProject.Services
             _fileWrapper = fileWrapper;
         }
 
-        public async Task Initialise()
+        public async Task Initialise(string input = null)
         {
-            await base.Initialise();
+            await base.Initialise(input);
         }
 
         public override async Task ProcessLines(List<string> lines)
         {
-            Dictionary<string, decimal> totalAmountPerNumber = new Dictionary<string, decimal>();
             Dictionary<string, double> totalCallTimePerNumber = new Dictionary<string, double>();
 
             int processedLines = 0;
@@ -55,13 +54,13 @@ namespace TalkDeskProject.Services
 
                 var lineItems = item.Split(_configuration.Delimiter);
 
-                var calc = _accountment.CalculateAmount(lineItems);
                 var time = _accountment.CalculateTime(lineItems);
 
-                totalAmountPerNumber.UpdateValue(calc.callFrom, calc.totalAmount);
                 totalCallTimePerNumber.UpdateValue(time.callFrom, time.totalTime);
                 processedLines++;
             }
+
+            var totalAmountPerNumber = _accountment.CalculateAmount(totalCallTimePerNumber);
 
             _console.WriteLine($"Total of {processedLines} lines processed with success.\n");
             _console.WriteLine($"Total of {errorLines} lines not processed.\n");
